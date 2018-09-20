@@ -1,4 +1,4 @@
-package com.fanwe.json;
+package cn.linhome.json;
 
 import org.junit.Test;
 
