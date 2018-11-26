@@ -1,51 +1,33 @@
 package cn.linhome.lib.utils.json;
 
-import cn.linhome.lib.utils.json.adapter.DoubleAdapter;
-import cn.linhome.lib.utils.json.adapter.FloatAdapter;
-import cn.linhome.lib.utils.json.adapter.IntegerAdapter;
-import cn.linhome.lib.utils.json.adapter.LongAdapter;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.alibaba.fastjson.JSON;
 
 import java.util.Map;
 
 public final class FJson
 {
-    public static final Gson gGSON = new GsonBuilder()
-            .registerTypeAdapter(int.class, new IntegerAdapter())
-            .registerTypeAdapter(Integer.class, new IntegerAdapter())
-
-            .registerTypeAdapter(long.class, new LongAdapter())
-            .registerTypeAdapter(Long.class, new LongAdapter())
-
-            .registerTypeAdapter(float.class, new FloatAdapter())
-            .registerTypeAdapter(Float.class, new FloatAdapter())
-
-            .registerTypeAdapter(double.class, new DoubleAdapter())
-            .registerTypeAdapter(Double.class, new DoubleAdapter())
-            .create();
-
     private FJson()
     {
     }
 
-    public static <T> T jsonToObject(String json, Class<T> clazz)
+    public static <T> T json2Object(String json, Class<T> clazz)
     {
-        return gGSON.fromJson(json, clazz);
+        return JSON.parseObject(json, clazz);
     }
 
-    public static String objectToJson(Object obj)
+    public static String object2Json(Object obj)
     {
-        return gGSON.toJson(obj);
+        return JSON.toJSONString(obj);
     }
 
-    public static <T> T mapToObject(Map map, Class<T> clazz)
+    public static <T> T map2Object(Map map, Class<T> clazz)
     {
-        if (map == null)
+        T t = null;
+        if (map != null)
         {
-            return null;
+            String json = object2Json(map);
+            t = json2Object(json, clazz);
         }
-        String json = objectToJson(map);
-        return jsonToObject(json, clazz);
+        return t;
     }
 }
