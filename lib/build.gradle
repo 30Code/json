@@ -8,8 +8,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 27
-        versionCode 20181207
-        versionName "1.0.4"
+        versionCode 20190115
+        versionName "1.0.5"
     }
 
     buildTypes {
@@ -22,7 +22,7 @@ android {
 }
 
 dependencies {
-    api 'com.alibaba:fastjson:1.1.70.android'
+    api 'com.google.code.gson:gson:2.8.5'
 }
 
 // 指定编码
