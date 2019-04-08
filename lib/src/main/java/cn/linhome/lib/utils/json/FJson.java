@@ -4,6 +4,8 @@ import cn.linhome.lib.utils.json.adapter.DoubleAdapter;
 import cn.linhome.lib.utils.json.adapter.FloatAdapter;
 import cn.linhome.lib.utils.json.adapter.IntegerAdapter;
 import cn.linhome.lib.utils.json.adapter.LongAdapter;
+import cn.linhome.lib.utils.json.adapter.StringAdapter;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -11,7 +13,7 @@ import java.util.Map;
 
 public final class FJson
 {
-    public static final Gson gGSON = new GsonBuilder()
+    public static final Gson GSON = new GsonBuilder()
             .registerTypeAdapter(int.class, new IntegerAdapter())
             .registerTypeAdapter(Integer.class, new IntegerAdapter())
 
@@ -23,6 +25,8 @@ public final class FJson
 
             .registerTypeAdapter(double.class, new DoubleAdapter())
             .registerTypeAdapter(Double.class, new DoubleAdapter())
+
+            .registerTypeAdapter(String.class, new StringAdapter())
             .create();
 
     private FJson()
@@ -31,12 +35,12 @@ public final class FJson
 
     public static <T> T jsonToObject(String json, Class<T> clazz)
     {
-        return gGSON.fromJson(json, clazz);
+        return GSON.fromJson(json, clazz);
     }
 
     public static String objectToJson(Object obj)
     {
-        return gGSON.toJson(obj);
+        return GSON.toJson(obj);
     }
 
     public static <T> T mapToObject(Map map, Class<T> clazz)
